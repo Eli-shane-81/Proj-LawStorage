@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="table.css">
+  <link rel="icon" href="icn.ico" type="image/x-icon">
+  <title>New Record</title>
+  <style>
+    .loading-screen.hidden { opacity: 0;    pointer-events: none;  }
+    
+    .loading-screen img {
+      max-width: 100%;
+      max-height: 100%;
+      animation: fadeOut 3s ease forwards;
+      height: auto;
+    }
+    
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.50);
+      }
+    }
+
+    .content {
+      opacity: 0;  transition: opacity 1s ease-in;
+    } .content.visible { opacity: 1; } 
+    </style>
+</head>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+      const loadingScreen = document.querySelector('.loading-screen');
+      const content = document.querySelector('.content');
+      if (!hasSeenIntro) {
+        content.classList.remove('visible');
+        setTimeout(() => {
+          loadingScreen.classList.add('hidden');
+          content.classList.add('visible');
+          sessionStorage.setItem('hasSeenIntro', 'true');
+        }, 4000);
+      } else {
+        loadingScreen.style.display = 'none';
+        content.classList.add('visible');
+      }
+    });
+</script>
+<body>
+  <div class='loading-screen'>
+    <img src='Logo.svg' alt='Loading Image' style="height: 60%; width: 40%;">
+  </div>
+  <div class="content" ">
+      <form action="ins.php" method="post" enctype="multipart/form-data" autocomplete="off">
+        <table border="2">
+          <tr>
+            <td>Party Name :
+            <td><input type="text" name="par" autofocus required>
+          </tr>
+          <tr>
+            <td>Application Type :
+            <td><input type="text" name="apt" required>
+          </tr>
+          <tr>
+            <td>Office Name :
+            <td><input type="text" name="off" required>
+          </tr>
+          <tr>
+            <td>Mob. No. :
+            <td><input type="text" name="mob" required placeholder="+91   - - -" maxlength="14">
+          </tr>
+          <tr>
+            <td>Application Date :
+            <td><input type="date" id="apd" name="apd" required>
+          </tr>
+          <tr>
+            <td>Final Date :
+            <td><input type="date" id="fin" name="fin">
+          </tr>
+          <tr>
+            <td>Photos :
+            <td><input type="file" name="file" accept="image/*, application/pdf">
+          </tr>
+        </table>
+        <br><br><input type="submit" value="Insert" name="in">
+      </form><br><br>
+      <form action='penDen.php' method='post'>
+        <input type='submit' value='Pending' name='pend'> | <input type='submit' value='Closed' id='don'> |
+        <a href="main.php"><input type="button" value="Search"></a>
+      </form>
+    </div>
+<footer>Developed by Purab Nehru</footer>
+</body>
+</html>
