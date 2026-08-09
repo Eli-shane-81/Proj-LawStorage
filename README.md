@@ -1,4 +1,4 @@
-# Proj-LawStorage
+# Proj-LawVault
 A web-Application for lawyers used for Data storage.
 
 Data Storage webapp for lawyers to keep a record of their client's cases. [CRUD operation]
